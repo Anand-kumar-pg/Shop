@@ -7,13 +7,12 @@ export default (user, statusCode, res) => {
 
     // Options for cookie
     const options = {
-        expires: new Date(
-            Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
-        ),
-        httpOnly: true
+        sameSite: 'none', // Allow cross-site requests
+            secure: true, // Only send cookie over HTTPS
+            maxAge: 100 * 60 * 1000 // Expiry time in milliseconds (100 minutes)
     };
 
-    res.status(statusCode).cookie("token", token, options).json({
+    res.cookie("token", token, options).status(statusCode).json({
         token,
     });
 };

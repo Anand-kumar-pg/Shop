@@ -6,7 +6,7 @@ import { connectDatabase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 import path from 'path';
 import { fileURLToPath } from "url";
-
+import cors from 'cors'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,7 +44,7 @@ import paymentRoutes from './routes/payment.js';
 
 
 
-
+app.use(cors({ origin: true, credentials: true }))
 app.use("/api/v1", productRoutes);
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", orderRoutes);
